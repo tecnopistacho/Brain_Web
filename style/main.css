@@ -1,3 +1,17 @@
 .hidden {
     display: none;
 }
+
+#medicine-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5 rem;
+    margin-bottom: 1rem;
+}
+
+#medicine-list li {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

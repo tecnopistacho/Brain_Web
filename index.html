@@ -23,7 +23,7 @@
 
     <main>
         <section id="home" class="view">Welcome to the Brain Rehabilitation App!</section>
-        <section id="info" class="view hidden"><p>This section will provide basic information about strokes, symptoms, and recovery tips.</p>
+        <section id="info" class="view hidden">
             <h2>What is a stroke?</h2>
             <p>A brain stroke refers to permanent brain tissue damage caued by insufficient blood flow, also known as ischemia. </p>
 
@@ -58,7 +58,36 @@
 
             <h4>Source: https://www.kaypahoito.fi/khp00062</h4>
         </section>
-        <section id="medicine" class="view hidden">[Medicine doset will go here]</section>
+        <section id="medicine" class="view hidden">
+            <h2>Virtual Doset</h2>
+            <form id="medicine-form">
+                <label>
+                    Medicine Name:
+                    <input type="text" id="med-name" required />
+                </label>
+                <label>
+                    Dose:
+                    <input type="text" id="med-dose" required />
+                </label>
+                <label>
+                    Time:
+                    <input type="time" id="med-time" required />
+                </label>
+                <label>
+                    Purpose:
+                    <input type="text" id="med-purpose" />
+                </label>
+                <label>
+                    Extra info:
+                    <textarea id="med-extra" placeholder="e.g. after or before breakfast, avoid milk"></textarea>
+                </label>
+                <button type="submit">Add Medicine</button>
+            </form>
+
+            <h3>Your Medicines</h3>
+            <ul id="medicine-list"></ul>
+        </section>
+        
         <section id="memory" class="view hidden">[Memory game will go here]</section>
         <section id="about" class="view hidden">[About and credits]</section>
     </main>
