@@ -331,7 +331,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Memory Game Logic
-
     const cardValues = ["🧠", "💊", "🍎", "🍏", "🐈‍⬛", "🌸", "🍭", "🧸", "🧠", "💊", "🍎", "🍏", "🐈‍⬛", "🌸", "🍭", "🧸"];
     let flippedCards = [];
     let matchedCards = [];
@@ -351,16 +350,30 @@ document.addEventListener("DOMContentLoaded", () => {
             card.classList.add("card");
             card.dataset.index = index;
             card.dataset.value = value;
-            card.innerText = "❓";
+
+            const inner = document.createElement("div");
+            inner.classList.add("card-inner");
+
+            const front = document.createElement("div");
+            front.classList.add("card-front");
+            front.innerText = "❓";
+            
+            const back = document.createElement("div");
+            back.classList.add("card-back");
+            back.innerText = value;
+
+            inner.appendChild(front);
+            inner.appendChild(back);
+            card.appendChild(inner);
             board.appendChild(card);
         });
     }
 
     board.addEventListener("click", (e) => {
-        const card = e.target;
-        if (!card.classList.contains("card") || flippedCards.includes(card) || matchedCards.includes(card)) return;
+        const card = e.target.closest(".card");
+        if (!card || flippedCards.includes(card) || matchedCards.includes(card)) return;
 
-        card.innerText = card.dataset.value;
+        card.classList.add("flipped");
         flippedCards.push(card);
 
         if (flippedCards.length == 2) {
@@ -370,8 +383,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             else {
                 setTimeout(() => {
-                    card1.innerText = "❓";
-                    card2.innerText = "❓";
+                    card1.classList.remove("flipped");
+                    card2.classList.remove("flipped");
 
                 }, 800);
             }

@@ -180,6 +180,13 @@ input:focus, textarea:focus, select:focus, button:focus {
 }
 
 /* Memory Game */
+#memory {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #game-board {
     display: grid;
     grid-template-columns: repeat(4, 60px);
@@ -197,12 +204,61 @@ input:focus, textarea:focus, select:focus, button:focus {
     border: 1px solid var(--color-border);
     cursor: pointer;
     user-select: none;
+    perspective: 1000px;
 }
 
 .card:hover {
     background-color: var(--color-border);
     transform: scale(1.05);
     transition: transform 0.2s ease;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background-color: var(--color-muted);
+    border: 1px solid var(--color-border);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+#restart-game {
+    width: auto;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #ff69b4;
+    color:white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+}
+
+#restart-game:hover {
+    background-color: #ff85c1;
 }
 
 /* Images */
