@@ -1,38 +1,37 @@
-# 🧠 Brain Rehabilitation Web App
+# 🧠 Aivokuntoutuksen verkkosovellus / Brain Rehabilitation Web App
 
-## 🎯 Purpose
-This web application was created as a course project for a web development class. It supports individuals recovering from a stroke by providing educational content, a virtual doset, and a memory game to aid cognitive rehabilitation.
+## 🎯 Tarkoitus
+Tämä verkkosovellus on toteutettu kurssiprojektina Web-sovellusten perusteet  opintojaksolla. Sovellus tukee aivohalvauksesta toipuvia henkilöitä tarjoamalla tietoa, lääkeseurannan työkalun (virtuaalinen dosetti) sekä muistipelin kognitiivisen kuntoutuksen tueksi.
 
-## 🚀 Features
-- **Responsive SPA layout** with smooth navigation
-- **Informational section** about stroke types, symptoms, and recovery tips
-- **Virtual Dosetti**: add medicines, doses, times, and notes; mark as taken
-- **Memory Game**: flip cards to find matching pairs, supporting cognitive recovery
-- **LocalStorage**: saves medicine data persistently
-- **Accessible design** with semantic HTML and clear layout
+## 🚀 Ominaisuudet
+- **Responsiivinen yksisivuinen käyttöliittymä** sujuvalla navigoinnilla
+- **Tieto**, jossa kerrotaan aivohalvauksen tyypeistä, oireista ja toipumisesta
+- **Virtuaalinen Dosetti**: lisää lääkkeitä, annoksia ja ajankohtia, merkitse otetut lääkkeet
+- **Muistipeli**: käännä kortteja ja etsi pareja, tukee kognitiivista harjoittelua
+- **LocalStorage**: pysyvä tallennus
 
-## 🛠️ How to Use
-1. Clone or download the repository
-2. Open `index.html` in your browser
-3. Navigate using the top menu:
-   - **Info**: Learn about stroke recovery
-   - **Medicines**: Track your daily medications
-   - **Memory Game**: Play a cognitive exercise
-   - **About**: Learn more about the project
+## 🛠️ Käyttöönohjeet
+1. Kloonaa tai lataa projektin lähdekoodi GitHubista
+2. Avaa `index.html` selaimessasi
+3. Navigoi ylävalikon kautta:
+   - **Info**: Tietoa aivohalvauksesta ja toipumisesta
+   - **Lääkkeet**: Seuraa päivittäistä lääkitystäsi
+   - **Muistipeli**: Pelaa kognitiivinen harjoitus
+   - **Tietoa**: Lisätietoa projektista
 
-## 🔐 API Keys
-No external APIs are currently used. If added later, instructions will appear here.
-
-## 📚 Sources
-- Stroke information: [Käypä hoito](https://www.kaypahoito.fi/khp00062)
-- Icons and emojis used for educational purposes
-- JavaScript logic inspired by MDN Web Docs and personal experimentation
+## 📚 Lähteet
+- Aivohalvaustieto: [Käypä hoito](https://www.kaypahoito.fi/khp00062)
+- Terveyskirjasto: Aivohalvaus ja kuntoutus
+- JavaScript ja LocalStorage: [MDN Web Docs] (https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- CSS: [CSS Tricks] (https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+- Muistipelin logiikka: [FreeCodeCamp] (https://www.freecodecamp.org/news/javascript-projects-for-beginners/#memory-game)
+- Virtuaalinen dosetti: ESKO-järjestelmä
 
 ## 📹 Demo Video
-A short video demonstrating the app and its code is available [here](YOUR_VIDEO_LINK).
+Lyhyt video sovelluksen toiminnasta ja koodista on katsottavissa [tästä] (YOUR_VIDEO_LINK).
 
-## 📦 Repository
-This project is hosted on GitHub: [GitHub Repository](YOUR_REPO_LINK)
+## 📦 Repositorio
+Projekti on saatavilla Githubissa: [GitHub Repository](https://github.com/tecnopistacho/Brain_Web)
 
-## ⚠️ License
-This project is for educational use only and not intended for clinical guidance or medical decision-making.
+## ⚠️ Lisenssi
+Sovellus on tarkoitettu vain opetuskäyttöön. Se ei sovellu kliiniseen ohjaukseen.

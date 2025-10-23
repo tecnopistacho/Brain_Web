@@ -87,7 +87,9 @@
                 <li>Seek support from family, friends, or professionals</li>
             </ul>
 
-            <h4 id="info-source">Source: https://www.kaypahoito.fi/khp00062</h4>
+            <h4 id="info-source">Source: <a
+                href="https://www.kaypahoito.fi/khp00062"
+            target="_blank">Käypähoito</a></h4>
         </section>
 
         <section id="medicine" class="view hidden">
@@ -101,9 +103,13 @@
                     Dose:
                     <input type="text" id="med-dose" required />
                 </label>
+                <label id="label-med-frequency">
+                    Times per day:
+                    <input type="number" id="med-frequency" min="1" max="24" required />
+                </label>
                 <label id="label-med-time">
                     Time:
-                    <input type="time" id="med-time" required />
+                    <input type="ext" id="med-time" placeholder="08:00, 20:00" required />
                 </label>
                 <label id="label-med-purpose">
                     Purpose:
@@ -124,6 +130,7 @@
             <h2 id="memory-heading">Memory Game</h2>
             <p id="memory-instructions">Click 2 cards to find a matching pair. Great for cognitive rehabilitation!</p>
             <div id="game-board"></div>
+            <p id="victory-message" class="hidden">🎉 You won! 🎉</p>
             <button id="restart-game">Restart Game</button>
         </section>
 
@@ -148,9 +155,12 @@
             <h3 id="sources-heading">Sources & Credits</h3>
             <ul id="sources-list">
                 <li>Stroke information: <a href="https://www.kaypahoito.fi/khp00062" target="_blank">Käypä hoito</a></li>
-                <li>Icons and emojis used for educational purposes</li>
-                <li>JavaScript logic and layout inspired by MDN Web Docs and personal experimentation</li>
+                <li>Stroke information: <a href="https://www.terveyskirjasto.fi/dlk00001" target="_blank">Terveyskirjasto</a></li>
+                <li>JavaScript and LocalStorage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN Web Docs</a></li>
                 <li>Spotting a stroke: <a href="https://www.health.harvard.edu/blog/how-to-recognize-a-ministroke-or-stroke-and-what-to-do-2020111021318" target="_blank">Harvard Health Publishing</a></li>
+                <li>CSS: <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank">CSS Tricks</a></li>
+                <li>Memory game logic: <a href="https://www.freecodecamp.org/news/javascript-projects-for-beginners/#memory-game" target="_blank">FreeCodeCapm</a></li>
+                <li>Virtual Doset: ESKO inspired</li>
             </ul>
 
             <h3 id="license-heading">License</h3>

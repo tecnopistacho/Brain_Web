@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const board = document.getElementById("game-board");
     const restartBtn = document.getElementById("restart-game");
     const languageSelect = document.getElementById("language-select");
+    
     let currentLang = "en";
 
 
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             medicineHeading: "Virtual Doset",
             addMedBtn: "Add Medicine",
             restartBtn: "Restart Game",
+            victoryMsg: "🎉 You won! 🎉",
             yourMedsHeading: "Your Medicines",
             memoryHeading: "Memory Game",
             memoryInstructions: "Click 2 cards to find a matching pair. Great for cognitive rehabilitation!",
@@ -80,8 +82,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ],
             sourcesList: [
                 'Stroke information: <a href="https://www.kaypahoito.fi/khp00062" target="_blank">Käypä hoito</a>',
-                "Icons and emojis used for educational purposes",
-                "JavaScript logic and layout inspired by MDN Web Docs and personal experimentation"
+                'Stroke information: <a href="https://www.terveyskirjasto.fi/dlk00001" target="_blank">Terveyskirjasto</a>',
+                'JavaScript and LocalStorage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN Web Docs</a>',
+                'Spotting a stroke: <a href="https://www.health.harvard.edu/blog/how-to-recognize-a-ministroke-or-stroke-and-what-to-do-2020111021318" target="_blank">Harvard Health Publishing</a>',
+                'CSS: <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank">CSS Tricks</a>',
+                'Memory game logic: <a href="https://www.freecodecamp.org/news/javascript-projects-for-beginners/#memory-game" target="_blank">FreeCodeCapm</a>',
+                "Virtual Doset: ESKO inspired"
             ],
             spotSource: 'Source: <a href="https://www.health.harvard.edu/blog/how-to-recognize-a-ministroke-or-stroke-and-what-to-do-2020111021318" target="_blank">Harvard Health Publishing</a>'
         },
@@ -108,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
             medicineHeading: "Virtuaalinen Dosetti",
             addMedBtn: "Lisää lääke",
             restartBtn: "Aloita peli uudelleen",
+            victoryMsg: "🎉 Voitit pelin! 🎉",
             yourMedsHeading: "Lääkkeesi",
             memoryHeading: "Muistipeli",
             memoryInstructions: "Klikkaa 2 korttia löytääksesi parin. Hyvä kognitiiviseen kuntoutukseen!",
@@ -155,8 +162,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ],
             sourcesList: [
                 'Aivohalvaustiedot: <a href="https://www.kaypahoito.fi/khp00062" target="_blank">Käypä hoito</a>',
-                "Kuvakkeet ja emojit opetuskäytössä",
-                "JavaScript-logiikka ja ulkoasu inspiroitu MDN Web Docsista ja omista kokeiluista"
+                'Aivohalvaustiedot: <a href="https://www.terveyskirjasto.fi/dlk00001" target="_blank">Terveyskirjasto</a>',
+                'JavaScript ja LocalStorage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">MDN Web Docs</a>',
+                'Aivohalvauksen tunnistamisen kuva: <a href="https://www.health.harvard.edu/blog/how-to-recognize-a-ministroke-or-stroke-and-what-to-do-2020111021318" target="_blank">Harvard Health Publishing</a>',
+                'CSS: <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank">CSS Tricks</a>',
+                'Muistipelin logiikka: <a href="https://www.freecodecamp.org/news/javascript-projects-for-beginners/#memory-game" target="_blank">FreeCodeCapm</a>',
+                "Virtuaallinen Dosetti: ESKO käytetty inspiraationa"
             ],
         spotSource: 'Lähde: <a href="https://www.health.harvard.edu/blog/how-to-recognize-a-ministroke-or-stroke-and-what-to-do-2020111021318" target="_blank">Harvard Health Publishing</a>'
         }
@@ -228,6 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("memory-heading").innerText = t.memoryHeading;
         document.getElementById("memory-instructions").innerText = t.memoryInstructions;
         document.getElementById("restart-game").innerText = t.restartBtn;
+        document.getElementById("victory-message").innerText = t.victoryMsg;
 
         // About
         document.getElementById("about-heading").innerText = t.aboutHeading;
@@ -272,31 +284,69 @@ document.addEventListener("DOMContentLoaded", () => {
         const meds = JSON.parse(localStorage.getItem("medicines")) || [];
         list.innerHTML = "";
 
+        const today = new Date().toDateString();
+
         meds.forEach((med, index) => {
+            // Reset taken status if it is a new day 
+            if (med.lastChecked != today) {
+                med.taken = Array.isArray(med.time) ? med.time.map(() => false) : [false];
+                med.lastChecked = today;
+            }
+
             const li = document.createElement("li");
+            li.classList.add("medicine-item");
             li.innerHTML = `
-            <strong>${med.name}</strong> (${med.dose}) at ${med.time}<br/>
-            Purpose: ${med.purpose || "-"}<br/>
-            Notes: ${med.extra || "-"}<br/>
-            <label>
-                <input type="checkbox" ${med.taken ? "checked" : ""} data-index=${index}" />
-                Taken
-            </label>
-            <button data-delete="${index}">Delete</button>
-            `;
+               <div class="med-info">
+                    <strong>${med.name}</strong> (${med.dose})<br/>
+                    Time: ${Array.isArray(med.time) ? med.time.join(", ") : med.time}<br/>
+                    Frequency: ${med.frequency || "-"}x/day<br/>
+                    Purpose: ${med.purpose || "-"}<br/>
+                    Notes: ${med.extra || "-"}<br/>
+                </div>
+                <div class="med-actions">
+                    ${med.time.map((t, i) => `
+                        <label class="dose-label">
+                            <input
+                                type="checkbox"
+                                ${med.taken[i] ? "checked" : ""} 
+                                data-index="${index}" 
+                                data-time="${i}" 
+                            />
+                            <span>${t}</span>
+                        </label>
+                    `).join("")}
+                    <button data-delete="${index}">Delete 🗑️</button>
+                </div>
+                `;
+
+            if (Array.isArray(med.taken) && med.taken.every(t => t)) {
+                li.classList.add("taken");
+            }
+            
             list.appendChild(li);
         });
+        // Save updated lastChecked values
+        localStorage.setItem("medicines", JSON.stringify(meds));
+        console.log("Rendering med:", med.name, "Taken:", med.taken);
     }
 
     form.addEventListener("submit", (e) => {
+        let timeInput = document.getElementById("med-time").value;
+        let timeArray = timeInput
+            .split(",")
+            .map(t => t.trim())
+            .filter(t => t);
+
         e.preventDefault();
         const newMed = {
             name: document.getElementById("med-name").value,
             dose: document.getElementById("med-dose").value,
-            time: document.getElementById("med-time").value,
+            frequency: document.getElementById("med-frequency").value,
+            time: timeArray,
             purpose: document.getElementById("med-purpose").value,
             extra: document.getElementById("med-extra").value,
-            taken: false
+            taken: timeArray.map(() => false),
+            lastChecked: new Date().toDateString()
         };
 
         const meds = JSON.parse(localStorage.getItem("medicines")) || [];
@@ -309,9 +359,16 @@ document.addEventListener("DOMContentLoaded", () => {
     list.addEventListener("change", (e) => {
         if (e.target.matches("input[type='checkbox']")) {
             const index = e.target.dataset.index;
+            const timeIndex = e.target.dataset.time;
             const meds = JSON.parse(localStorage.getItem("medicines")) || [];
-            meds[index].taken = e.target.checked;
+
+            if (Array.isArray(meds[index].taken)) {
+                meds[index].taken[timeIndex] = e.target.checked
+            }
+
+            meds[index].lastChecked = new Date().toDateString();
             localStorage.setItem("medicines", JSON.stringify(meds));
+            loadMedicines();
         }
     });
 
@@ -344,6 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
         flippedCards = [];
         matchedCards = [];
         const shuffled = shuffle([...cardValues]);
+        document.getElementById("victory-message").classList.add("hidden");
 
         shuffled.forEach((value, index) => {
             const card = document.createElement("div");
@@ -380,6 +438,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const [card1, card2] = flippedCards;
             if (card1.dataset.value == card2.dataset.value) {
                 matchedCards.push(card1, card2);
+
+                if (matchedCards.length == cardValues.length) {
+                    document.getElementById("victory-message").classList.remove("hidden");
+                }
             }
             else {
                 setTimeout(() => {
