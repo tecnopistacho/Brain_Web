@@ -28,7 +28,7 @@ Tämä verkkosovellus on toteutettu kurssiprojektina Web-sovellusten perusteet  
 - Virtuaalinen dosetti: ESKO-järjestelmä
 
 ## 📹 Demo Video
-Lyhyt video sovelluksen toiminnasta ja koodista on katsottavissa [tästä] (YOUR_VIDEO_LINK).
+Lyhyt video sovelluksen toiminnasta ja koodista on katsottavissa [tästä] (https://www.youtube.com/watch?v=RC1qo6xFMA0).
 
 ## 📦 Repositorio
 Projekti on saatavilla Githubissa: [GitHub Repository](https://github.com/tecnopistacho/Brain_Web)
